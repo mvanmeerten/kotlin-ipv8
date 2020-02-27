@@ -39,7 +39,7 @@ class TransactionFragment : BaseFragment() {
         }
     }
 
-    // https://demonuts.com/kotlin-generate-qr-code/
+    // from: https://demonuts.com/kotlin-generate-qr-code/
     fun createQR(view: View) {
         if (view.editTxtQRInput.text.toString().trim { it <= ' ' }.length == 0) {
             Toast.makeText(activity, "Enter String!", Toast.LENGTH_SHORT).show()
@@ -91,6 +91,7 @@ class TransactionFragment : BaseFragment() {
         private val IMAGE_DIRECTORY = "/QRcodeDemonuts"
     }
 
+    // from: https://ariefbayu.xyz/create-barcode-scanner-for-android-using-kotlin-b1a9b1c4d848
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         var result: IntentResult? = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if(result != null) {
