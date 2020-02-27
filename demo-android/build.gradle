@@ -13,6 +13,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -66,8 +67,8 @@ dependencies {
     implementation 'com.github.tony19:logback-android:2.0.0'
 
     // QR code
-    implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
-    implementation 'com.google.zxing:core:3.4.0'
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    implementation 'com.android.support:multidex:1.0.3'
 
     // Testing
     testImplementation 'junit:junit:4.12'
