@@ -47,4 +47,8 @@
         android:id="@+id/latestBlocksFragment"
         android:name="nl.tudelft.ipv8.android.demo.ui.blocks.LatestBlocksFragment"
         android:label="All Blocks" />
+    <fragment
+        android:id="@+id/newTransactionFragment"
+        android:name="nl.tudelft.ipv8.android.demo.ui.transactions.NewTransactionFragment"
+        android:label="Debug" />
 </navigation>
