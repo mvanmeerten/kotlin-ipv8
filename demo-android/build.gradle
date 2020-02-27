@@ -35,6 +35,10 @@ android {
 
 }
 
+repositories {
+    jcenter()
+}
+
 dependencies {
     def fragment_version = "1.2.0"
 
@@ -60,6 +64,10 @@ dependencies {
     implementation 'com.mattskala:itemadapter:0.2'
     implementation 'io.github.microutils:kotlin-logging:1.7.7'
     implementation 'com.github.tony19:logback-android:2.0.0'
+
+    // QR code
+    implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
+    implementation 'com.google.zxing:core:3.4.0'
 
     // Testing
     testImplementation 'junit:junit:4.12'

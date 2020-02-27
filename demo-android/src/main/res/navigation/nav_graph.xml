@@ -16,6 +16,10 @@
             app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
+        android:id="@+id/transactionFragment"
+        android:name="nl.tudelft.ipv8.android.demo.ui.transaction.TransactionFragment"
+        android:label="Transaction" />
+    <fragment
         android:id="@+id/usersFragment"
         android:name="nl.tudelft.ipv8.android.demo.ui.users.UsersFragment"
         android:label="All Chains">
