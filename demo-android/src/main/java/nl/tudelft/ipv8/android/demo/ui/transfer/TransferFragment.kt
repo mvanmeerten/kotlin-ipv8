@@ -1,4 +1,4 @@
-package nl.tudelft.ipv8.android.demo.ui.transaction
+package nl.tudelft.ipv8.android.demo.ui.transfer
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.zxing.BarcodeFormat
@@ -20,13 +18,12 @@ import com.google.zxing.common.BitMatrix
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.fragment_peers.recyclerView
-import kotlinx.android.synthetic.main.fragment_transaction.*
-import kotlinx.android.synthetic.main.fragment_transaction.view.*
+import kotlinx.android.synthetic.main.fragment_transfer.*
+import kotlinx.android.synthetic.main.fragment_transfer.view.*
 import nl.tudelft.ipv8.android.demo.R
 import nl.tudelft.ipv8.android.demo.ui.BaseFragment
-import nl.tudelft.ipv8.android.demo.ui.peers.MainActivity
 
-class TransactionFragment : BaseFragment() {
+class TransferFragment : BaseFragment() {
     internal var bitmap: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,7 +107,7 @@ class TransactionFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_transaction, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_transfer, container, false)
         view.btnScan.setOnClickListener {
             startQRScanner()
         }

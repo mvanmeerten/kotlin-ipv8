@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/transactionFragment"
-        android:name="nl.tudelft.ipv8.android.demo.ui.transaction.TransactionFragment"
+        android:name="nl.tudelft.ipv8.android.demo.ui.transfer.TransferFragment"
         android:label="Transaction" />
     <fragment
         android:id="@+id/usersFragment"
