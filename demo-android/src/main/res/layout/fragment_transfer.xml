@@ -7,58 +7,115 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout android:orientation="vertical"
-        android:layout_height="match_parent"
+    <LinearLayout
+        android:id="@+id/transferLayout"
+        android:orientation="vertical"
+        android:gravity="top"
+        android:layout_height="100dp"
         android:layout_width="match_parent"
-        android:id="@+id/transactionLayout">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Scanned Value: "
-            android:id="@+id/txtValueLabel"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="{{please scan first}}"
-            android:id="@+id/txtValue"
-            app:layout_constraintLeft_toRightOf="@id/txtValueLabel"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnScan"
-            android:text="Scan"
-            app:layout_constraintTop_toBottomOf="@id/txtValueLabel"
-            />
-        <EditText
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <Switch
+            android:id="@+id/switch1"
+            android:text="Send / Receive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editTxtQRInput"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
-            android:hint="Enter String" />
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:textOn="SEND"
+            android:textOff="RECEIVE"
+            android:paddingHorizontal="6dp"
+            android:paddingBottom="20dp"
+            android:textSize="20sp"
+            android:textAlignment="viewStart" />
+    </LinearLayout>
 
-        <Button
+    <LinearLayout
+        android:id="@+id/transferReceiveLayout"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/SenderScanPK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnCreateQR"
-            android:text="Create QR code"
-            android:layout_marginTop="10dp"/>
+            android:text="Sender to scan this QR-code containing your details:"
+            android:paddingHorizontal="6dp" />
 
         <ImageView
+            android:id="@+id/QRPK"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="20dp"
+            android:clickable="false" />
+
+        <Button
+            android:id="@+id/QRPK_Next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:id="@+id/imageQR"/>
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="50dp"
+            android:padding="15dp"
+            android:text="Scan"
+            app:layout_constraintTop_toBottomOf="@id/ScanAfterQRPK" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/transferSendLayout"
+        android:orientation="vertical"
+        android:layout_height="326dp"
+        android:layout_width="417dp"
+        android:gravity="top"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/txtValueLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amount to send:"
+            android:paddingHorizontal="6dp" />
+
+        <EditText
+            android:id="@+id/editTxtQRInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="20dp"
+            android:hint="Enter Amount" />
+
+        <Button
+            android:id="@+id/btnScan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:padding="15dp"
+            android:text="Scan"
+            app:layout_constraintTop_toBottomOf="@id/txtValueLabel" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/transactionLayout"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

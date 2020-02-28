@@ -16,9 +16,9 @@
             app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
-        android:id="@+id/transactionFragment"
+        android:id="@+id/transferFragment"
         android:name="nl.tudelft.ipv8.android.demo.ui.transfer.TransferFragment"
-        android:label="Transaction" />
+        android:label="Transfer" />
     <fragment
         android:id="@+id/usersFragment"
         android:name="nl.tudelft.ipv8.android.demo.ui.users.UsersFragment"

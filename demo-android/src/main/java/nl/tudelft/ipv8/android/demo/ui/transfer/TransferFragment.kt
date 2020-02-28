@@ -1,13 +1,11 @@
 package nl.tudelft.ipv8.android.demo.ui.transfer
 
-import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,13 +13,11 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
-import com.google.zxing.integration.android.IntentIntegrator
-import com.google.zxing.integration.android.IntentResult
-import kotlinx.android.synthetic.main.fragment_peers.recyclerView
-import kotlinx.android.synthetic.main.fragment_transfer.*
+import kotlinx.android.synthetic.main.fragment_peers.*
 import kotlinx.android.synthetic.main.fragment_transfer.view.*
 import nl.tudelft.ipv8.android.demo.R
 import nl.tudelft.ipv8.android.demo.ui.BaseFragment
+
 
 class TransferFragment : BaseFragment() {
     internal var bitmap: Bitmap? = null
@@ -30,24 +26,13 @@ class TransferFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
     }
 
-    fun startQRScanner() {
-        run {
-            IntentIntegrator(this.activity).initiateScan()
-        }
-    }
-
     // from: https://demonuts.com/kotlin-generate-qr-code/
     fun createQR(view: View) {
-        if (view.editTxtQRInput.text.toString().trim { it <= ' ' }.length == 0) {
-            Toast.makeText(activity, "Enter String!", Toast.LENGTH_SHORT).show()
-        } else {
-            try {
-                bitmap = TextToImageEncode(view.editTxtQRInput.text.toString())
-                view.imageQR.setImageBitmap(bitmap)
+        try {
+                bitmap = TextToImageEncode("MY PUBLIC KEY")
+                view.QRPK.setImageBitmap(bitmap)
             } catch (e: WriterException) {
                 e.printStackTrace()
-            }
-
         }
     }
 
@@ -88,31 +73,29 @@ class TransferFragment : BaseFragment() {
         private val IMAGE_DIRECTORY = "/QRcodeDemonuts"
     }
 
-    // from: https://ariefbayu.xyz/create-barcode-scanner-for-android-using-kotlin-b1a9b1c4d848
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        var result: IntentResult? = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        if(result != null) {
-            if(result.contents != null) {
-                txtValue.text = result.contents
-            } else {
-                txtValue.text = "scan failed"
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        var sendOrReceive = true;
         val view: View = inflater.inflate(R.layout.fragment_transfer, container, false)
-        view.btnScan.setOnClickListener {
-            startQRScanner()
-        }
-        view.btnCreateQR.setOnClickListener {
-            createQR(view);
+        val view2: View = view.findViewById(R.id.transferSendLayout) as LinearLayout
+        view2.visibility = View.VISIBLE
+        val view3: View = view.findViewById(R.id.transferReceiveLayout) as LinearLayout
+        view3.visibility = View.GONE
+        createQR(view);
+        view.switch1.setOnClickListener {
+            if (sendOrReceive){
+                view2.visibility = View.GONE
+                view3.visibility = View.VISIBLE
+                sendOrReceive = false;
+
+            }
+            else{
+                view3.visibility = View.GONE
+                view2.visibility = View.VISIBLE
+                sendOrReceive = true;}
         }
         return view
     }
