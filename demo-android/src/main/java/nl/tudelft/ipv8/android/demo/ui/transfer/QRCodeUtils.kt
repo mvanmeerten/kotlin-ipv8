@@ -11,6 +11,7 @@ import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.integration.android.IntentIntegrator
+import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.fragment_transfer.view.*
 import nl.tudelft.ipv8.android.demo.R
 
@@ -24,7 +25,7 @@ class QRCodeUtils(private val activity: FragmentActivity?, private val context: 
 
     // from: https://demonuts.com/kotlin-generate-qr-code/
     fun createQR(view: View): Bitmap? {
-        if (view.editTxtQRInput.text.toString().trim { it <= ' ' }.length == 0) {
+        if (view.editTxtQRInput.text.toString().trim { it <= ' ' }.isEmpty()) {
             Toast.makeText(activity, "Enter String!", Toast.LENGTH_SHORT).show()
         } else {
             try {

@@ -8,12 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
-import kotlinx.android.synthetic.main.fragment_transfer.*
 import kotlinx.android.synthetic.main.fragment_transfer_receive.view.*
 import nl.tudelft.ipv8.android.demo.R
 import nl.tudelft.ipv8.android.demo.ui.BaseFragment
 
-class TransferReceiveFragment : BaseFragment() {
+class TransferReceiveFragment(content: String) : BaseFragment() {
     val qrCodeUtils = QRCodeUtils(activity, requireContext())
 
     override fun onCreate(savedInstanceState: Bundle?) {

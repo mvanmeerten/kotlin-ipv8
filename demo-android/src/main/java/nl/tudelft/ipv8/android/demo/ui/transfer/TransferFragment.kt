@@ -1,26 +1,30 @@
 package nl.tudelft.ipv8.android.demo.ui.transfer
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
-import kotlinx.android.synthetic.main.fragment_peers.*
+import com.google.zxing.integration.android.IntentIntegrator
+import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.fragment_transfer.view.*
+import mu.KotlinLogging
 import nl.tudelft.ipv8.android.demo.R
 import nl.tudelft.ipv8.android.demo.ui.BaseFragment
 
 
 class TransferFragment : BaseFragment() {
+    private val logger = KotlinLogging.logger {}
     internal var bitmap: Bitmap? = null
+    var sendOrReceive = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,15 +41,15 @@ class TransferFragment : BaseFragment() {
     }
 
     @Throws(WriterException::class)
-    private fun TextToImageEncode(Value: String): Bitmap? {
+    private fun TextToImageEncode(value: String): Bitmap? {
         val bitMatrix: BitMatrix
         try {
             bitMatrix = MultiFormatWriter().encode(
-                Value,
+                value,
                 BarcodeFormat.QR_CODE,
                 QRcodeWidth, QRcodeWidth, null
             )
-        } catch (Illegalargumentexception: IllegalArgumentException) {
+        } catch (IllegalArgumentException: IllegalArgumentException) {
             return null
         }
 
@@ -78,7 +82,6 @@ class TransferFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var sendOrReceive = true;
         val view: View = inflater.inflate(R.layout.fragment_transfer, container, false)
         val view2: View = view.findViewById(R.id.transferSendLayout) as LinearLayout
         view2.visibility = View.VISIBLE
@@ -90,21 +93,49 @@ class TransferFragment : BaseFragment() {
                 view2.visibility = View.GONE
                 view3.visibility = View.VISIBLE
                 sendOrReceive = false;
-
-            }
-            else{
+            } else {
                 view3.visibility = View.GONE
                 view2.visibility = View.VISIBLE
-                sendOrReceive = true;}
+                sendOrReceive = true;
+            }
+        }
+        view.QRPK_Next.setOnClickListener {
+            QRCodeUtils(requireActivity(), requireContext()).startQRScanner()
+        }
+        view.btnSendScan.setOnClickListener {
+            QRCodeUtils(requireActivity(), requireContext()).startQRScanner()
         }
         return view
     }
 
+    // from: https://ariefbayu.xyz/create-barcode-scanner-for-android-using-kotlin-b1a9b1c4d848
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        var result: IntentResult? = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if(result != null) {
+            val content = result.contents
+            if(content != null) {
+                val fragmentManager = requireActivity().supportFragmentManager
+                if(sendOrReceive) {
+                    val transferSendFragment = TransferSendFragment(content)
+                    fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_view_tag, transferSendFragment)
+                        .commit()
+                } else {
+                    val transferReceiveFragment = TransferReceiveFragment(content)
+                    fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_view_tag, transferReceiveFragment)
+                        .commit()
+                }
+            } else {
+                Log.d("QR Scan", "Scan failed")
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
-
     }
 }
