@@ -84,7 +84,6 @@
             android:text="@string/next"
             app:layout_constraintRight_toRightOf="@id/transferReceiveLinear"
             app:layout_constraintBottom_toBottomOf="@id/transferReceiveLinear" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

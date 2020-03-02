@@ -24,12 +24,12 @@ class QRCodeUtils(private val activity: FragmentActivity?, private val context: 
     }
 
     // from: https://demonuts.com/kotlin-generate-qr-code/
-    fun createQR(view: View): Bitmap? {
-        if (view.editTxtQRInput.text.toString().trim { it <= ' ' }.isEmpty()) {
+    fun createQR(view: View, text: String): Bitmap? {
+        if (text.isEmpty()) {
             Toast.makeText(activity, "Enter String!", Toast.LENGTH_SHORT).show()
         } else {
             try {
-                return TextToImageEncode(view.editTxtQRInput.text.toString())
+                return TextToImageEncode(text)
             } catch (e: WriterException) {
                 e.printStackTrace()
             }
