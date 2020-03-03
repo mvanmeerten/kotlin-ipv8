@@ -18,7 +18,14 @@
     <fragment
         android:id="@+id/transferFragment"
         android:name="nl.tudelft.ipv8.android.demo.ui.transfer.TransferFragment"
-        android:label="Transfer" />
+        android:label="Transfer" >
+        <action
+            android:id="@+id/action_transferFragment_to_transferReceiveFragment"
+            app:destination="@id/transferReceiveFragment" />
+        <action
+            android:id="@+id/action_transferFragment_to_transferSendFragment"
+            app:destination="@id/transferSendFragment" />
+    </fragment>
     <fragment
         android:id="@+id/usersFragment"
         android:name="nl.tudelft.ipv8.android.demo.ui.users.UsersFragment"
@@ -51,4 +58,34 @@
         android:id="@+id/latestBlocksFragment"
         android:name="nl.tudelft.ipv8.android.demo.ui.blocks.LatestBlocksFragment"
         android:label="All Blocks" />
+    <fragment
+        android:id="@+id/transferConfirmationFragment"
+        android:name="nl.tudelft.ipv8.android.demo.ui.transfer.TransferConfirmationFragment"
+        android:label="TransferConfirmationFragment" >
+        <action
+            android:id="@+id/action_transferConfirmationFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferReceiveFragment"
+        android:name="nl.tudelft.ipv8.android.demo.ui.transfer.TransferReceiveFragment"
+        android:label="TransferReceiveFragment" >
+        <action
+            android:id="@+id/action_transferReceiveFragment_to_transferConfirmationFragment"
+            app:destination="@id/transferConfirmationFragment" />
+        <action
+            android:id="@+id/action_transferReceiveFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferSendFragment"
+        android:name="nl.tudelft.ipv8.android.demo.ui.transfer.TransferSendFragment"
+        android:label="TransferSendFragment" >
+        <action
+            android:id="@+id/action_transferSendFragment_to_transferConfirmationFragment"
+            app:destination="@id/transferConfirmationFragment" />
+        <action
+            android:id="@+id/action_transferSendFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
+    </fragment>
 </navigation>

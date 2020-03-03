@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.view.isGone
+import androidx.fragment.app.replace
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.fragment_transfer.view.*
@@ -45,10 +49,14 @@ class TransferFragment : BaseFragment() {
             }
         }
         view.QRPK_Next.setOnClickListener {
-            QRCodeUtils(requireActivity(), requireContext()).startQRScanner()
+            //QRCodeUtils(requireActivity(), requireContext()).startQRScanner()
+            //Temporary QR scan skip
+            view.findNavController().navigate(R.id.action_transferFragment_to_transferReceiveFragment)
         }
         view.btnSendScan.setOnClickListener {
-            QRCodeUtils(requireActivity(), requireContext()).startQRScanner()
+            //QRCodeUtils(requireActivity(), requireContext()).startQRScanner()
+            //Temporary QR scan skip
+            view.findNavController().navigate(R.id.action_transferFragment_to_transferSendFragment)
         }
         return view
     }
@@ -63,15 +71,13 @@ class TransferFragment : BaseFragment() {
         if(result != null) { // This is a result returned by the QR scanner
             val content = result.contents
             if(content != null) {
-                val newFragment = if(sendOrReceive) {
-                    TransferSendFragment(content)
+                if(sendOrReceive) {
+                    // TODO: Handle parsing of qr code and passing along to new fragment
+                    requireView().findNavController().navigate(R.id.action_transferFragment_to_transferSendFragment)
                 } else {
-                    TransferReceiveFragment(content)
+                    // TODO: Handle parsing of qr code and passing along to new fragment
+                    requireView().findNavController().navigate(R.id.action_transferFragment_to_transferReceiveFragment)
                 }
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_view_tag, newFragment)
-                    .addToBackStack(null)   // Allow user to go back to this fragment
-                    .commit()
             } else {
                 Log.d("QR Scan", "Scan failed")
             }

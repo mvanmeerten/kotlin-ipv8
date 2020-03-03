@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.fragment_transfer_confirmation.view.*
 import nl.tudelft.ipv8.android.demo.R
 import nl.tudelft.ipv8.android.demo.ui.BaseFragment
@@ -19,9 +20,7 @@ class TransferConfirmationFragment: BaseFragment() {
         view.animation_view.addAnimatorListener(object: AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
                 super.onAnimationEnd(animation)
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_view_tag, TransferFragment())
-                    .commit()
+                view.findNavController().navigate(R.id.action_transferConfirmationFragment_to_transferFragment)
             }
         })
     }
