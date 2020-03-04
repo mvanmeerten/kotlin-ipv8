@@ -50,5 +50,5 @@
     <fragment
         android:id="@+id/newTransactionFragment"
         android:name="nl.tudelft.ipv8.android.demo.ui.transactions.NewTransactionFragment"
-        android:label="Debug" />
+        android:label="New transaction" />
 </navigation>

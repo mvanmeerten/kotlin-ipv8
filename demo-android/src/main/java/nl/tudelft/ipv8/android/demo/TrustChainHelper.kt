@@ -50,6 +50,15 @@ class TrustChainHelper(
     }
 
     /**
+     * Creates a new proposal block, using transaction amount as the transaction content.
+     */
+    fun createTxProposalBlock(amount: Float, publicKey: ByteArray) {
+        val blockType = "demo_tx_block"
+        val transaction = mapOf("amount" to amount)
+        trustChainCommunity.createProposalBlock(blockType, transaction, publicKey)
+    }
+
+    /**
      * Creates an agreement block to a specified proposal block, using a custom transaction.
      */
     fun createAgreementBlock(link: TrustChainBlock, transaction: TrustChainTransaction) {
