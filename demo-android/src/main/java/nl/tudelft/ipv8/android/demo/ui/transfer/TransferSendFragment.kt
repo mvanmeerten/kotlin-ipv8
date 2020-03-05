@@ -22,6 +22,7 @@ class TransferSendFragment() : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_transfer_send, container, false)
+        val publicKey = arguments?.get("Public Key")
         val bitmap: Bitmap? = QRCodeUtils(activity, requireContext())
             .createQR("MY Proposal BLOCK")
             view.proposalBlockQR.setImageBitmap(bitmap)
@@ -42,7 +43,7 @@ class TransferSendFragment() : BaseFragment() {
         if(result != null) { // This is a result returned by the QR scanner
             val content = result.contents
             if(content != null) {
-                // TODO: Handle parsing of scanned contents
+                // TODO: Handle parsing of scanned agreement block
                 requireView().findNavController().navigate(R.id.action_transferSendFragment_to_transferConfirmationFragment)
             } else {
                 Log.d("QR Scan", "Scan failed")
