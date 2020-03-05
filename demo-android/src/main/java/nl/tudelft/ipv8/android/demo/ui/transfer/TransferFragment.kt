@@ -12,7 +12,6 @@ import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.fragment_transfer.view.*
 import nl.tudelft.ipv8.android.demo.R
-import nl.tudelft.ipv8.android.demo.TrustChainHelper
 import nl.tudelft.ipv8.android.demo.ui.BaseFragment
 import nl.tudelft.ipv8.util.toHex
 
