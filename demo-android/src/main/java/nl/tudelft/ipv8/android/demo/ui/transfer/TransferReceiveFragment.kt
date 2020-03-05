@@ -33,14 +33,14 @@ class TransferReceiveFragment() : BaseFragment() {
         view.textSenderPublicKey.text = "Public key: $publicKey"
         view.textTransferAmount.text = "Amount: $amount"
         view.buttonConfirmReceipt.setOnClickListener {
-            //QRCodeUtils(activity, requireContext()).startQRScanner()
+            QRCodeUtils(activity, requireContext()).startQRScanner(this)
             // TODO: The code below is for skipping actual qr scanning, remove when implemented
-            val view: View = requireView()
-            view.transferReceiveLinear.visibility = View.GONE
-            view.transferReceiveLinearConfirmed.visibility = View.VISIBLE
-            val bitmap: Bitmap? = QRCodeUtils(activity, requireContext())
-                .createQR(view, "MY AGREEMENT BLOCK")
-            view.image3rdQR.setImageBitmap(bitmap)
+//            val view: View = requireView()
+//            view.transferReceiveLinear.visibility = View.GONE
+//            view.transferReceiveLinearConfirmed.visibility = View.VISIBLE
+//            val bitmap: Bitmap? = QRCodeUtils(activity, requireContext())
+//                .createQR(view, "MY AGREEMENT BLOCK")
+//            view.image3rdQR.setImageBitmap(bitmap)
         }
         // Go back to transfer without the ability to go back to this fragment
         view.buttonCancelReceipt.setOnClickListener {

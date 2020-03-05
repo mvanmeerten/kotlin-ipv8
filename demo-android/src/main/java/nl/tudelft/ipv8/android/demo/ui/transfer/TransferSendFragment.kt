@@ -26,8 +26,8 @@ class TransferSendFragment() : BaseFragment() {
             .createQR(view, "MY Proposal BLOCK")
             view.proposalBlockQR.setImageBitmap(bitmap)
         view.btnProposalScannedNext.setOnClickListener {
-            //QRCodeUtils(requireActivity(), requireContext()).startQRScanner()
-            view.findNavController().navigate(R.id.action_transferSendFragment_to_transferConfirmationFragment)
+            QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)
+            //view.findNavController().navigate(R.id.action_transferSendFragment_to_transferConfirmationFragment)
         }
         return view
     }

@@ -1,10 +1,12 @@
 package nl.tudelft.ipv8.android.demo.ui.transfer
 
+import FragmentIntentIntegrator
 import android.content.Context
 import android.graphics.Bitmap
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
@@ -17,9 +19,9 @@ import nl.tudelft.ipv8.android.demo.R
 
 class QRCodeUtils(private val activity: FragmentActivity?, private val context: Context) {
 
-    fun startQRScanner() {
+    fun startQRScanner(fragment: Fragment) {
         run {
-            IntentIntegrator(activity).initiateScan()
+            FragmentIntentIntegrator(fragment).initiateScan()
         }
     }
 

@@ -49,14 +49,14 @@ class TransferFragment : BaseFragment() {
             }
         }
         view.QRPK_Next.setOnClickListener {
-            //QRCodeUtils(requireActivity(), requireContext()).startQRScanner()
+            QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)
             //Temporary QR scan skip
-            view.findNavController().navigate(R.id.action_transferFragment_to_transferReceiveFragment)
+            //view.findNavController().navigate(R.id.action_transferFragment_to_transferReceiveFragment)
         }
         view.btnSendScan.setOnClickListener {
-            //QRCodeUtils(requireActivity(), requireContext()).startQRScanner()
+            QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)
             //Temporary QR scan skip
-            view.findNavController().navigate(R.id.action_transferFragment_to_transferSendFragment)
+            //view.findNavController().navigate(R.id.action_transferFragment_to_transferSendFragment)
         }
         return view
     }
@@ -68,11 +68,15 @@ class TransferFragment : BaseFragment() {
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result: IntentResult? = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        println("Acivitty returned")
         if(result != null) { // This is a result returned by the QR scanner
+            println("Scanned result is okay")
             val content = result.contents
             if(content != null) {
+                println("Content is okay")
                 if(sendOrReceive) {
                     // TODO: Handle parsing of qr code and passing along to new fragment
+                    println("viewproblem")
                     requireView().findNavController().navigate(R.id.action_transferFragment_to_transferSendFragment)
                 } else {
                     // TODO: Handle parsing of qr code and passing along to new fragment
