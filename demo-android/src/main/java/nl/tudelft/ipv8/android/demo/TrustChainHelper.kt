@@ -63,4 +63,8 @@ class TrustChainHelper(
     fun getChainByUser(publicKeyBin: ByteArray): List<TrustChainBlock> {
         return trustChainCommunity.database.getMutualBlocks(publicKeyBin, 1000)
     }
+
+    fun getMyPublicKey(): ByteArray {
+        return trustChainCommunity.myPeer.publicKey.keyToBin()
+    }
 }
