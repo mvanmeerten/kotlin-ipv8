@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
@@ -49,12 +50,14 @@ class TransferFragment : BaseFragment() {
         view.QRPK_Next.setOnClickListener {
             QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)
             //Temporary QR scan skip
-            //view.findNavController().navigate(R.id.action_transferFragment_to_transferReceiveFragment)
+//            val bundle = bundleOf("Proposal Block" to "Prop blockje")
+//            view.findNavController().navigate(R.id.action_transferFragment_to_transferReceiveFragment, bundle)
         }
         view.btnSendScan.setOnClickListener {
             QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)
             //Temporary QR scan skip
-            //view.findNavController().navigate(R.id.action_transferFragment_to_transferSendFragment)
+//            val bundle = bundleOf("Public Key" to "pub keytje")
+//            view.findNavController().navigate(R.id.action_transferFragment_to_transferSendFragment, bundle)
         }
         return view
     }
@@ -71,10 +74,12 @@ class TransferFragment : BaseFragment() {
             if(content != null) {
                 if(sendOrReceive) {
                     // TODO: Handle parsing of qr code and passing along to new fragment
-                    requireView().findNavController().navigate(R.id.action_transferFragment_to_transferSendFragment)
+                    val bundle = bundleOf("Public Key" to content)
+                    requireView().findNavController().navigate(R.id.action_transferFragment_to_transferSendFragment, bundle)
                 } else {
                     // TODO: Handle parsing of qr code and passing along to new fragment
-                    requireView().findNavController().navigate(R.id.action_transferFragment_to_transferReceiveFragment)
+                    val bundle = bundleOf("Proposal Block" to content)
+                    requireView().findNavController().navigate(R.id.action_transferFragment_to_transferReceiveFragment, bundle)
                 }
             } else {
                 Log.d("QR Scan", "Scan failed")
