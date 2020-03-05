@@ -12,7 +12,9 @@ import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.fragment_transfer.view.*
 import nl.tudelft.ipv8.android.demo.R
+import nl.tudelft.ipv8.android.demo.TrustChainHelper
 import nl.tudelft.ipv8.android.demo.ui.BaseFragment
+import nl.tudelft.ipv8.util.toHex
 
 
 class TransferFragment : BaseFragment() {
@@ -32,7 +34,7 @@ class TransferFragment : BaseFragment() {
         val view3: View = view.findViewById(R.id.transferReceiveLayout) as LinearLayout
         view3.visibility = View.GONE
         view.QRPK.setImageBitmap(
-            QRCodeUtils(requireActivity(), requireContext()).createQR("MY PUBLIC KEY")
+            QRCodeUtils(requireActivity(), requireContext()).createQR(trustchain.getMyPublicKey().toHex())
         )
         view.switch1.setOnClickListener {
             if (sendOrReceive){
