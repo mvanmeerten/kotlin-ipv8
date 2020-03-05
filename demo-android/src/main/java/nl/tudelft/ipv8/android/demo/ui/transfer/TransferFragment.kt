@@ -14,6 +14,8 @@ import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.fragment_transfer.view.*
 import nl.tudelft.ipv8.android.demo.R
 import nl.tudelft.ipv8.android.demo.ui.BaseFragment
+import nl.tudelft.ipv8.attestation.trustchain.TrustChainBlock
+import nl.tudelft.ipv8.util.hexToBytes
 import nl.tudelft.ipv8.util.toHex
 
 
@@ -48,16 +50,18 @@ class TransferFragment : BaseFragment() {
             }
         }
         view.QRPK_Next.setOnClickListener {
-            QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)
+//            QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)
             //Temporary QR scan skip
-//            val bundle = bundleOf("Proposal Block" to "Prop blockje")
-//            view.findNavController().navigate(R.id.action_transferFragment_to_transferReceiveFragment, bundle)
+            val bundle = bundleOf("Proposal Block" to "Prop blockje")
+            view.findNavController().navigate(R.id.action_transferFragment_to_transferReceiveFragment, bundle)
         }
+
         view.btnSendScan.setOnClickListener {
-            QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)
+//            QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)
             //Temporary QR scan skip
-//            val bundle = bundleOf("Public Key" to "pub keytje")
-//            view.findNavController().navigate(R.id.action_transferFragment_to_transferSendFragment, bundle)
+            val amount = 15
+            val bundle = bundleOf("Amount" to amount.toString())
+            view.findNavController().navigate(R.id.action_transferFragment_to_transferSendFragment, bundle)
         }
         return view
     }

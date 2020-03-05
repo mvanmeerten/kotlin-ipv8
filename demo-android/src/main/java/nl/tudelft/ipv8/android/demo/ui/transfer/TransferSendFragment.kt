@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
+import kotlinx.android.synthetic.main.fragment_transfer_receive.view.*
 import kotlinx.android.synthetic.main.fragment_transfer_send.view.*
 import nl.tudelft.ipv8.android.demo.R
 import nl.tudelft.ipv8.android.demo.ui.BaseFragment
+import nl.tudelft.ipv8.util.hexToBytes
 
 class TransferSendFragment() : BaseFragment() {
 
@@ -22,12 +24,12 @@ class TransferSendFragment() : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_transfer_send, container, false)
-        val publicKey = arguments?.get("Public Key")
-        val bitmap: Bitmap? = QRCodeUtils(activity, requireContext())
-            .createQR("MY Proposal BLOCK")
+        val block = trustchain.createTxProposalBlock(10.toFloat(), "4c69624e61434c504b3a511fdaab386c761a8320e522ae988ce055e3119cc9621583fed029732e88b1095cfc91ba0af79d6277f08fefc8b9ed28d4861ab3701ec7d5327ebf74eff0e464".hexToBytes())
+        val bitmap: Bitmap? = QRCodeUtils(requireActivity(), requireContext())
+            .createQR(block.toString())
             view.proposalBlockQR.setImageBitmap(bitmap)
         view.btnProposalScannedNext.setOnClickListener {
-            QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)
+//            QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)
             //view.findNavController().navigate(R.id.action_transferSendFragment_to_transferConfirmationFragment)
         }
         return view
