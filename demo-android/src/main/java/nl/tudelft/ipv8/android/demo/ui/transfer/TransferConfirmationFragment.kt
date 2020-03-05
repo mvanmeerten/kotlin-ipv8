@@ -11,6 +11,9 @@ import kotlinx.android.synthetic.main.fragment_transfer_confirmation.view.*
 import nl.tudelft.ipv8.android.demo.R
 import nl.tudelft.ipv8.android.demo.ui.BaseFragment
 
+/**
+ * Fragment for the success animation. Can handle some logic if necessary
+ */
 class TransferConfirmationFragment: BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(R.layout.fragment_transfer_confirmation, container, false)

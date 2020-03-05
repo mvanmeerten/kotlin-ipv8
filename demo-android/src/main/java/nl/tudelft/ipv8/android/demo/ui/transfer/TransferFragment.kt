@@ -7,10 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.core.view.isGone
-import androidx.fragment.app.replace
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.fragment_transfer.view.*
@@ -19,7 +16,7 @@ import nl.tudelft.ipv8.android.demo.ui.BaseFragment
 
 
 class TransferFragment : BaseFragment() {
-    var sendOrReceive = true
+    private var sendOrReceive = true
 
     /**
      * Handle the toggleSwitch correctly switching views.
@@ -35,7 +32,7 @@ class TransferFragment : BaseFragment() {
         val view3: View = view.findViewById(R.id.transferReceiveLayout) as LinearLayout
         view3.visibility = View.GONE
         view.QRPK.setImageBitmap(
-            QRCodeUtils(requireActivity(), requireContext()).createQR(view, "MY PUBLIC KEY")
+            QRCodeUtils(requireActivity(), requireContext()).createQR("MY PUBLIC KEY")
         )
         view.switch1.setOnClickListener {
             if (sendOrReceive){
@@ -68,15 +65,11 @@ class TransferFragment : BaseFragment() {
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result: IntentResult? = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        println("Acivitty returned")
         if(result != null) { // This is a result returned by the QR scanner
-            println("Scanned result is okay")
             val content = result.contents
             if(content != null) {
-                println("Content is okay")
                 if(sendOrReceive) {
                     // TODO: Handle parsing of qr code and passing along to new fragment
-                    println("viewproblem")
                     requireView().findNavController().navigate(R.id.action_transferFragment_to_transferSendFragment)
                 } else {
                     // TODO: Handle parsing of qr code and passing along to new fragment

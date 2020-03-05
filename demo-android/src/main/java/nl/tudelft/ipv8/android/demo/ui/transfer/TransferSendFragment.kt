@@ -23,7 +23,7 @@ class TransferSendFragment() : BaseFragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_transfer_send, container, false)
         val bitmap: Bitmap? = QRCodeUtils(activity, requireContext())
-            .createQR(view, "MY Proposal BLOCK")
+            .createQR("MY Proposal BLOCK")
             view.proposalBlockQR.setImageBitmap(bitmap)
         view.btnProposalScannedNext.setOnClickListener {
             QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)

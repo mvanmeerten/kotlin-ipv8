@@ -68,7 +68,7 @@ class TransferReceiveFragment() : BaseFragment() {
                 view.transferReceiveLinear.visibility = View.GONE
                 view.transferReceiveLinearConfirmed.visibility = View.VISIBLE
                 val bitmap: Bitmap? = QRCodeUtils(activity, requireContext())
-                    .createQR(view, "MY AGREEMENT BLOCK")
+                    .createQR("MY AGREEMENT BLOCK")
                 view.image3rdQR.setImageBitmap(bitmap)
             } else {
                 Log.d("Scan Proposal QR","Scan failed")
