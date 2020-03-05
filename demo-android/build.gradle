@@ -13,6 +13,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,6 +34,10 @@ android {
         jvmTarget = "1.8"
     }
 
+}
+
+repositories {
+    jcenter()
 }
 
 dependencies {
@@ -60,6 +65,13 @@ dependencies {
     implementation 'com.mattskala:itemadapter:0.2'
     implementation 'io.github.microutils:kotlin-logging:1.7.7'
     implementation 'com.github.tony19:logback-android:2.0.0'
+
+    // QR code
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    implementation 'com.android.support:multidex:1.0.3'
+
+    // Animation
+    implementation 'com.airbnb.android:lottie:3.4.0'
 
     // Testing
     testImplementation 'junit:junit:4.12'

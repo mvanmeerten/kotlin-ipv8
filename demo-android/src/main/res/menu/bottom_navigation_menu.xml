@@ -19,7 +19,7 @@
         android:title="My Chain"
         android:icon="@drawable/ic_person_black_24dp" />
     <item
-        android:id="@+id/debugFragment"
-        android:title="Debug"
-        android:icon="@drawable/ic_bug_report_black_24dp" />
+        android:id="@+id/transferFragment"
+        android:title="Transfer"
+        android:icon="@drawable/ic_money_transaction" />
 </menu>

@@ -1,6 +1,7 @@
 package nl.tudelft.ipv8.android.demo
 
 import android.app.Application
+import androidx.multidex.MultiDexApplication
 import androidx.preference.PreferenceManager
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
@@ -20,7 +21,7 @@ import nl.tudelft.ipv8.sqldelight.Database
 import nl.tudelft.ipv8.util.hexToBytes
 import nl.tudelft.ipv8.util.toHex
 
-class DemoApplication : Application() {
+class DemoApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
 
