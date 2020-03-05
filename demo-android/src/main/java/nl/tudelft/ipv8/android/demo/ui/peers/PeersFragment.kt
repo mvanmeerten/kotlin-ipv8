@@ -84,6 +84,25 @@ class PeersFragment : BaseFragment() {
                 }
             }, "demo_block")
 
+            trustchain.registerTransactionValidator("demo_tx_block", object : TransactionValidator {
+                override fun validate(
+                    block: TrustChainBlock,
+                    database: TrustChainStore
+                ): Boolean {
+                    return block.transaction["amount"] != null
+                }
+            })
+
+            trustchain.addListener(object : BlockListener {
+                override fun shouldSign(block: TrustChainBlock): Boolean {
+                    return true
+                }
+
+                override fun onBlockReceived(block: TrustChainBlock) {
+                    Log.d("TrustChainDemo", "onBlockReceived: ${block.blockId} ${block.transaction}")
+                }
+            }, "demo_tx_block")
+
             while (isActive) {
                 val overlays = getIpv8().overlays
 
