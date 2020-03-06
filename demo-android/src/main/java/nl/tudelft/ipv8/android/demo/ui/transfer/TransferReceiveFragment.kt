@@ -14,6 +14,7 @@ import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.fragment_transfer_receive.view.*
 import nl.tudelft.ipv8.android.demo.R
 import nl.tudelft.ipv8.android.demo.ui.BaseFragment
+import nl.tudelft.ipv8.attestation.trustchain.TransactionEncoding
 
 class TransferReceiveFragment() : BaseFragment() {
 
@@ -28,9 +29,9 @@ class TransferReceiveFragment() : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_transfer_receive, container, false)
-        val proposalBlock = arguments?.get("Proposal Block")
-        val publicKey = "hmm"
-        val amount = "zoveel"
+        val proposalBlock = TransferBlockParser().stringToProposal(arguments?.get("Proposal Block") as String)
+        val publicKey = proposalBlock.publicKey
+        val amount = TransactionEncoding.decode(proposalBlock.rawTransaction)
         view.textSenderPublicKey.text = "Public key: $publicKey"
         view.textTransferAmount.text = "Amount: $amount"
         view.buttonConfirmReceipt.setOnClickListener {

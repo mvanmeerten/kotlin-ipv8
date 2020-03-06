@@ -28,7 +28,7 @@ class TransferSendFragment() : BaseFragment() {
         val amount = arguments?.get("Amount")
         val block = trustchain.createTxProposalBlock(amount.toString().toFloat(), receiverPublicKey.toString().hexToBytes())
         val bitmap: Bitmap? = QRCodeUtils(requireActivity(), requireContext())
-            .createQR(TransferBlockParser().toString())
+            .createQR(TransferBlockParser().proposalToString(block))
         view.proposalBlockQR.setImageBitmap(bitmap)
         view.btnProposalScannedNext.setOnClickListener {
             QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)
