@@ -54,8 +54,8 @@ class TransferFragment : BaseFragment() {
         QRPK_Next.setOnClickListener {
             QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)
             //Temporary QR scan skip
-            val bundle = bundleOf("Proposal Block" to "Prop blockje")
-            view.findNavController().navigate(R.id.action_transferFragment_to_transferReceiveFragment, bundle)
+//            val bundle = bundleOf("Proposal Block" to "Prop blockje")
+//            view.findNavController().navigate(R.id.action_transferFragment_to_transferReceiveFragment, bundle)
         }
 
         btnScanPk.setOnClickListener {
@@ -93,7 +93,6 @@ class TransferFragment : BaseFragment() {
                 if (isSending) {
                     editTxtAddress.setText(content)
                 } else {
-                    // TODO: Handle parsing of qr code and passing along to new fragment
                     val bundle = bundleOf("Proposal Block" to content)
                     requireView().findNavController()
                         .navigate(R.id.action_transferFragment_to_transferReceiveFragment, bundle)

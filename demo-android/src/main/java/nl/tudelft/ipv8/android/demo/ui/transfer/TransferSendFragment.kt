@@ -27,6 +27,7 @@ class TransferSendFragment() : BaseFragment() {
         val receiverPublicKey = arguments?.get("Public Key")
         val amount = arguments?.get("Amount")
         val block = trustchain.createTxProposalBlock(amount.toString().toFloat(), receiverPublicKey.toString().hexToBytes())
+        println("Json in is " + TransferBlockParser().proposalToString(block))
         val bitmap: Bitmap? = QRCodeUtils(requireActivity(), requireContext())
             .createQR(TransferBlockParser().proposalToString(block))
         view.proposalBlockQR.setImageBitmap(bitmap)

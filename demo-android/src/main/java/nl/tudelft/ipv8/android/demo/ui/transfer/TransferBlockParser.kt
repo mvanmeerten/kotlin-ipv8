@@ -27,9 +27,6 @@ class TransferBlockParser {
         return json.stringify(SerializableBlock.serializer(), serializableBlock)
     }
 
-    @Serializer(forClass = SerializableBlock::class)
-    object ExtDataSerializer
-
     fun stringToProposal(jsonString: String): TrustChainBlock {
         val json = Json(JsonConfiguration.Stable)
         val serializableBlock = json.parse(SerializableBlock.serializer(), jsonString)

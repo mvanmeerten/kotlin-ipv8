@@ -1,16 +1,12 @@
 package nl.tudelft.ipv8.android.demo.ui.transfer
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import com.google.zxing.integration.android.IntentIntegrator
-import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.fragment_transfer_receive.view.*
 import nl.tudelft.ipv8.android.demo.R
 import nl.tudelft.ipv8.android.demo.ui.BaseFragment
@@ -29,7 +25,8 @@ class TransferReceiveFragment() : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_transfer_receive, container, false)
-        val proposalBlock = TransferBlockParser().stringToProposal(arguments?.get("Proposal Block") as String)
+        println("json is " + arguments?.get("Proposal Block"))
+        val proposalBlock = TransferBlockParser().stringToProposal((arguments?.get("Proposal Block") as String))
         val publicKey = proposalBlock.publicKey
         val amount = TransactionEncoding.decode(proposalBlock.rawTransaction)
         view.textSenderPublicKey.text = "Public key: $publicKey"
