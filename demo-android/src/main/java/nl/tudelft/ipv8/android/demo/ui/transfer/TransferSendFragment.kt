@@ -13,6 +13,7 @@ import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.fragment_transfer_send.view.*
 import nl.tudelft.ipv8.android.demo.R
 import nl.tudelft.ipv8.android.demo.ui.BaseFragment
+import nl.tudelft.ipv8.util.toHex
 
 class TransferSendFragment() : BaseFragment() {
 
@@ -22,9 +23,15 @@ class TransferSendFragment() : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_transfer_send, container, false)
-        val publicKey = arguments?.get("Public Key")
+
+        val receiverPublicKey = arguments?.get("Public Key")
+//        val amount =
+//        val amount =
+//        val transaction =
+//        val block = trustchain.createProposalBlock(receiverPublicKey)
+
         val bitmap: Bitmap? = QRCodeUtils(activity, requireContext())
-            .createQR("MY Proposal BLOCK")
+            .createQR("Proposal block")
             view.proposalBlockQR.setImageBitmap(bitmap)
         view.btnProposalScannedNext.setOnClickListener {
             QRCodeUtils(requireActivity(), requireContext()).startQRScanner(this)
