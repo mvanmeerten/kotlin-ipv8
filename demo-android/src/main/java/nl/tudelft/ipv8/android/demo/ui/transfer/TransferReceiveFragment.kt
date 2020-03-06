@@ -26,7 +26,7 @@ class TransferReceiveFragment() : BaseFragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_transfer_receive, container, false)
         println("json is " + arguments?.get("Proposal Block"))
-        val proposalBlock = TransferBlockParser().stringToProposal((arguments?.get("Proposal Block") as String))
+        val proposalBlock = TransferBlockParser().stringToProposal((arguments?.get("Proposal Block") as String), trustchain)
         val publicKey = proposalBlock.publicKey
         val amount = TransactionEncoding.decode(proposalBlock.rawTransaction)
         view.textSenderPublicKey.text = "Public key: $publicKey"

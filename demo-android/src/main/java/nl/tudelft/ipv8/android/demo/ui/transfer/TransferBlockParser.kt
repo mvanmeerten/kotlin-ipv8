@@ -1,8 +1,8 @@
 package nl.tudelft.ipv8.android.demo.ui.transfer
 
-import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
+import nl.tudelft.ipv8.android.demo.TrustChainHelper
 import nl.tudelft.ipv8.attestation.trustchain.TrustChainBlock
 import java.util.*
 
@@ -13,11 +13,8 @@ class TransferBlockParser {
     fun proposalToString(block: TrustChainBlock): String {
 
         val serializableBlock: SerializableBlock = SerializableBlock(
-            block.blockId,
-            block.type,
             block.publicKey,
             block.sequenceNumber.toInt(),
-            block.linkPublicKey,
             block.previousHash,
             block.signature,
             block.rawTransaction,
@@ -27,10 +24,10 @@ class TransferBlockParser {
         return json.stringify(SerializableBlock.serializer(), serializableBlock)
     }
 
-    fun stringToProposal(jsonString: String): TrustChainBlock {
+    fun stringToProposal(jsonString: String, trustChain: TrustChainHelper): TrustChainBlock {
         val json = Json(JsonConfiguration.Stable)
         val serializableBlock = json.parse(SerializableBlock.serializer(), jsonString)
-        return TrustChainBlock(serializableBlock.type, serializableBlock.transaction, serializableBlock.publicKey, serializableBlock.sequenceNumber.toUInt(),
-        serializableBlock.linkPublicKey, UNKNOWN_SEQ, serializableBlock.previousHash, serializableBlock.signature, Date(serializableBlock.timeStamp))
+        return TrustChainBlock("demo_tx_block", serializableBlock.transaction, serializableBlock.publicKey, serializableBlock.sequenceNumber.toUInt(),
+            trustChain.getMyPublicKey(), UNKNOWN_SEQ, serializableBlock.previousHash, serializableBlock.signature, Date(serializableBlock.timeStamp))
     }
 }
