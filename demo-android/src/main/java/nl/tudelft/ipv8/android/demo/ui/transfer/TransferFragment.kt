@@ -67,11 +67,20 @@ class TransferFragment : BaseFragment() {
         }
 
         btnSendProposalBlock.setOnClickListener {
-            val amount = editTxtAmount.text.toString().toFloat()
-            val publicKey = editTxtAddress.text.toString().hexToBytes()
+            val amount = if(editTxtAmount.text != null) {
+                editTxtAmount.text.toString().toFloat()
+            } else {
+                0f
+            }
+            val publicKey = if(editTxtAddress.text != null) {
+                editTxtAddress.text.toString().hexToBytes()
+            } else {
+                "null".hexToBytes()
+            }
             trustchain.createTxProposalBlock(amount, publicKey)
-            val snack = Snackbar.make(it, "Sent $amount", Snackbar.LENGTH_LONG)
-            snack.show()
+            val bundle = bundleOf("Amount" to amount, "Public Key" to publicKey)
+            requireView().findNavController()
+                .navigate(R.id.action_transferFragment_to_transferSendFragment, bundle)
         }
     }
 
