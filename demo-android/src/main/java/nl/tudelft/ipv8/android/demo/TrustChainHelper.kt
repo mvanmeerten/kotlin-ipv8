@@ -43,11 +43,12 @@ class TrustChainHelper(
     /**
      * Creates a new proposal block, using a text message as the transaction content.
      */
-    fun createProposalBlock(message: String, publicKey: ByteArray) {
+    fun createProposalBlock(message: String, publicKey: ByteArray): TrustChainBlock {
         val blockType = "demo_block"
         val transaction = mapOf("message" to message)
-        trustChainCommunity.createProposalBlock(blockType, transaction, publicKey)
+        return trustChainCommunity.createProposalBlock(blockType, transaction, publicKey)
     }
+
     /**
      * Creates a new proposal block, using transaction amount as the transaction content.
      */
@@ -60,8 +61,11 @@ class TrustChainHelper(
     /**
      * Creates an agreement block to a specified proposal block, using a custom transaction.
      */
-    fun createAgreementBlock(link: TrustChainBlock, transaction: TrustChainTransaction) {
-        trustChainCommunity.createAgreementBlock(link, transaction)
+    fun createAgreementBlock(
+        proposalBlock: TrustChainBlock,
+        transaction: TrustChainTransaction
+    ): TrustChainBlock {
+        return trustChainCommunity.createAgreementBlock(proposalBlock, transaction)
     }
 
     /**

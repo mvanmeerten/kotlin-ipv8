@@ -6,6 +6,7 @@ import nl.tudelft.ipv8.attestation.trustchain.validation.ValidationResult
 import nl.tudelft.ipv8.keyvault.PrivateKey
 import nl.tudelft.ipv8.util.sha256
 import nl.tudelft.ipv8.util.toHex
+import java.io.Serializable
 import java.lang.Exception
 import java.util.*
 
@@ -73,6 +74,7 @@ class TrustChainBlock(
      */
     val insertTime: Date? = null
 ) {
+
     val blockId = publicKey.toHex() + "." + sequenceNumber
 
     val linkedBlockId = linkPublicKey.toHex() + "." + linkSequenceNumber
