@@ -27,6 +27,7 @@ class TransferReceiveFragment() : BaseFragment() {
         val view: View = inflater.inflate(R.layout.fragment_transfer_receive, container, false)
         println("json is " + arguments?.get("Proposal Block"))
         val proposalBlock = TransferBlockParser().stringToProposal((arguments?.get("Proposal Block") as String), trustchain)
+        val agreementBlock = trustchain.createAgreementBlock(proposalBlock, proposalBlock.transaction)
         val publicKey = proposalBlock.publicKey
         val amount = TransactionEncoding.decode(proposalBlock.rawTransaction)
         view.textSenderPublicKey.text = "Public key: $publicKey"
@@ -36,7 +37,7 @@ class TransferReceiveFragment() : BaseFragment() {
             view.transferReceiveLinear.visibility = View.GONE
             view.transferReceiveLinearConfirmed.visibility = View.VISIBLE
             val bitmap: Bitmap? = QRCodeUtils(activity, requireContext())
-                .createQR("MY AGREEMENT BLOCK")
+                .createQR(TransferBlockParser().proposalToString(agreementBlock))
             view.image3rdQR.setImageBitmap(bitmap)
         }
         // Go back to transfer without the ability to go back to this fragment
